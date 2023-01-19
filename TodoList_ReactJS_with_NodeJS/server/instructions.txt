@@ -1,0 +1,15 @@
+Create a folder with given files in server 
+
+From the folder path 
+run npm install 
+npm run start
+
+Your node server must be available in the configured port
+
+
+(
+  Note: Install following packages for smooth running
+  1)express
+  2)cors
+  3)body-parser
+)
