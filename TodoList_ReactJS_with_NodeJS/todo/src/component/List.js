@@ -7,7 +7,7 @@ const List = (props) => {
     debugger
     return(
      <div>
-        <ul class="list-group" style={{textAlign : 'left'}}>
+        <ul className="list-group" style={{textAlign : 'left'}}>
         {statusFlag == "showActiveTasks" &&
             todoItems.map((item)=>{
                     if(item.activeStatus == true){
