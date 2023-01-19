@@ -19,6 +19,7 @@ const Todo = () => {
     const [flag, setFlag] = useState("showAllTasks");
     const [refresh, setRefresh] = useState("")
 
+
     useEffect(()=>{
         axios.get(`${baseURL}`).then(function (response) {
           setTodoList(response.data.todoList)
@@ -29,7 +30,7 @@ const Todo = () => {
       },[])
 
       useEffect(()=>{
-        debugger
+        
         axios.get(`${baseURL}`).then(function (response) {
           setTodoList(response.data.todoList)
         })
@@ -41,7 +42,7 @@ const Todo = () => {
 
 
     const addTodo = () => {
-        debugger
+        
         axios.post(`${baseURL}`, {
           name: value,
           completed: false,
@@ -68,7 +69,7 @@ const Todo = () => {
     }
 
     const taskCompleted = (id) => {
-        debugger
+        
         axios.put(`${baseURL}/completed/${id}`, {
           name: value,
           completed: true,
@@ -76,7 +77,7 @@ const Todo = () => {
           deActiveStatus : true,
         })
         .then(function (response) {
-            setRefresh(id)
+            setRefresh(value)
         })
         .catch(function (error) {
         console.log(error);
@@ -85,7 +86,7 @@ const Todo = () => {
     }
 
     const setStatus = (id, value) => {
-        debugger
+        
         axios.put(`${baseURL}/status/${id}`, {
             name: value,
             completed: true,
@@ -93,7 +94,7 @@ const Todo = () => {
             deActiveStatus : value == "deactive" ? true : false,
           })
           .then(function (response) {
-              setRefresh(id)
+              refresh == id ? setRefresh(value) : setRefresh(id) 
           })
           .catch(function (error) {
           console.log(error);
@@ -104,18 +105,18 @@ const Todo = () => {
         <div className="container" style={{width : '70%'}}>
             <h2 style={{margin : "30px"}}>Todo List using ReactJS and NodeJS</h2>
             <div>
-            <form class="d-flex" role="search">
-                <input class="form-control me-2" style={{width : '88%'}}
+            <form className="d-flex" role="search">
+                <input className="form-control me-2" style={{width : '88%'}}
                     type="text" value={value} placeholder="Enter your task" aria-label="Search"
                     onChange={(e)=>setvalue(e.target.value)}
                     />
-                <button class="btn btn-outline-success" type="submit" onClick={value && addTodo}>Add task</button>
+                <button className="btn btn-outline-success" type="submit" onClick={value && addTodo}>Add task</button>
             </form>
             </div>
-            <div class="btn-group" style={{marginTop : "10px", display : 'flex'}}>
-                        <button onClick={()=>{setFlag("showActiveTasks")}} type="button" class="btn btn-primary">Active</button>
-                        <button onClick={()=>{setFlag("showCompletedTasks")}} type="button" class="btn btn-primary">Cpmpleted</button>
-                        <button onClick={()=>{setFlag("showAllTasks")}} type="button" class="btn btn-primary">All</button>
+            <div className="btn-group" style={{marginTop : "10px", display : 'flex'}}>
+                        <button onClick={()=>{setFlag("showActiveTasks")}} type="button" className="btn btn-primary">Active</button>
+                        <button onClick={()=>{setFlag("showCompletedTasks")}} type="button" className="btn btn-primary">Cpmpleted</button>
+                        <button onClick={()=>{setFlag("showAllTasks")}} type="button" className="btn btn-primary">All</button>
             </div>
             {
                 <div>
@@ -144,37 +145,3 @@ const Todo = () => {
 }
 
 export default Todo
-
-
-
-
-
-
-
-            {/* <div class="form-group" style={{display : "flex"}}>
-                <input type='text' class="form-control" name="todo"
-                                    placeholder="Enter your task"
-                                    onChange={(e)=>setvalue(e.target.value)}
-                />
-                <Tooltip title="Add">
-                    <Button onClick={addTodo}>
-                        <AddIcon />
-                    </Button>
-                </Tooltip>
-            </div> */}
-
-                        {/* <div>
-                <input type='text' class="form-control" name="todo"
-                    placeholder="Enter your task"
-                    onChange={(e)=>setvalue(e.target.value)}
-                />
-                <Tooltip title="Add">
-                    <Button onClick={addTodo}>
-                        <AddIcon />
-                    </Button>
-                </Tooltip>
-            </div> */}
-
-            {/* <button onClick={()=>{setFlag("showActiveTasks")}} >Active</button>
-                    <button onClick={()=>{setFlag("showCompletedTasks")}} >Cpmpleted</button>
-                    <button onClick={()=>{setFlag("showAllTasks")}} >All</button> */}
