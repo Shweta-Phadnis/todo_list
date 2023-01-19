@@ -4,7 +4,6 @@ import TodoItems from "./TodoItems";
 const List = (props) => {
     const {todoItems, statusFlag} = props
     var counter = 0
-    debugger
     return(
      <div>
         <ul className="list-group" style={{textAlign : 'left'}}>
